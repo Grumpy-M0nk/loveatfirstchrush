@@ -31,13 +31,21 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      background: linear-gradient(135deg, #fff0f5, #ffe4e1);
+      color: white;
+      /* The rgba(0,0,0, 0.5) creates a 50% dark overlay so the text remains readable */
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                  url('banner-image.jpg') center/cover no-repeat;
     }
     
     .hero h1 {
       font-size: 4rem;
       margin-bottom: 10px;
-      color: #d16b8a;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
     }
 
     /* Floating Music Player */
@@ -128,6 +136,19 @@
       height: 300px;
       border: none;
       border-radius: 5px;
+      margin-top: 15px;
+    }
+
+    /* Bottom Banner */
+    .bottom-banner {
+      background-color: var(--primary-color);
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
     }
 
     /* Mobile Responsiveness */
@@ -192,6 +213,29 @@
       </div>
     </div>
 
+    <!-- Memory 4 (New) -->
+    <div class="memory right">
+      <div class="content">
+        <h2>Funny Picture</h2>
+        <img src="funny.jpg" alt="Trip Memory">
+        <p>Cause the best memories are the funny ones :3</p>
+      </div>
+    </div>
+
+    <!-- Memory 5 (New) -->
+    <div class="memory left">
+      <div class="content">
+        <h2>The big day</h2>
+        <img src="engagement.jpg" alt="Everyday Memory">
+        <p>A day we celebrated our love with everyone who loves us</br>The drama, stress, misunderstanding only brought us closer</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Banner -->
+  <div class="bottom-banner">
+    More coming soon! ❤️
   </div>
 
   <script>
