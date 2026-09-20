@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Prevents search engines from indexing the free link -->
+  <meta name="robots" content="noindex">
+  <title>Happy Birthday, Bubbles!</title>
+  
+  <style>
+    /* Base Styles & Typography */
+    :root {
+      --primary-color: #ffb6c1; /* Soft pink */
+      --bg-color: #fafafa;
+      --text-color: #333;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      overflow-x: hidden;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(135deg, #fff0f5, #ffe4e1);
+    }
+    
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 10px;
+      color: #d16b8a;
+    }
+
+    /* Floating Music Player */
+    .music-player {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+      background: white;
+      padding: 15px;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    
+    .music-player:hover {
+      transform: scale(1.05);
+    }
+
+    /* Timeline Container */
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+    
+    /* The Center Line */
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background-color: var(--primary-color);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -2px;
+    }
+
+    /* Memory Blocks */
+    .memory {
+      padding: 20px 40px;
+      position: relative;
+      background-color: inherit;
+      width: 50%;
+      box-sizing: border-box;
+    }
+    
+    .memory.left { left: 0; }
+    .memory.right { left: 50%; }
+
+    /* Timeline Dots */
+    .memory::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      right: -10px;
+      background-color: white;
+      border: 4px solid var(--primary-color);
+      top: 25px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+    .memory.right::after { left: -10px; }
+
+    /* Content Cards */
+    .content {
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    
+    .content img {
+      width: 100%;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    /* Map Container */
+    .map-container iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    /* Mobile Responsiveness */
+    @media screen and (max-width: 768px) {
+      .timeline::after { left: 31px; }
+      .memory { width: 100%; padding-left: 70px; padding-right: 25px; }
+      .memory.right { left: 0; }
+      .memory.left::after, .memory.right::after { left: 21px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Music Audio Tag -->
+  <audio id="bg-music" loop>
+    <!-- Replace with your actual music file path -->
+    <source src="your-song.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Floating Music Toggle -->
+  <div class="music-player" id="music-btn">
+    <span id="play-icon">▶️</span>
+    <span id="music-text">Play Our Song</span>
+  </div>
+
+  <section class="hero">
+    <h1>Happy Birthday, Bubbles!</h1>
+    <p>A look back at our beautiful moments together.</p>
+  </section>
+
+  <div class="timeline">
+    
+    <!-- Memory 1: A Standard Photo -->
+    <div class="memory left">
+      <div class="content">
+        <h2>The Beginning</h2>
+        <!-- Plugin your picture here -->
+        <img src="placeholder-image1.jpg" alt="First Memory">
+        <p>A little caption about this beautiful memory.</p>
+      </div>
+    </div>
+
+    <!-- Memory 2: Location / Map Embed -->
+    <div class="memory right">
+      <div class="content">
+        <h2>A Special Place</h2>
+        <p>Thinking back to that beautiful day at Kodra Lake.</p>
+        <!-- Plugin your Google Maps Embed iframe here -->
+        <div class="map-container">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14605.972304958615!2d90.3957!3d23.7317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8eb8db6b1d1%3A0x6b445e998989b52a!2sKodra%20Lake!5e0!3m2!1sen!2sae!4v1691234567890!5m2!1sen!2sae" 
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Memory 3: Another Photo -->
+    <div class="memory left">
+      <div class="content">
+        <h2>Adventures Together</h2>
+        <img src="placeholder-image2.jpg" alt="Adventure Memory">
+        <p>Looking forward to making so many more memories.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Custom JS to handle the background music player
+    const bgMusic = document.getElementById('bg-music');
+    const musicBtn = document.getElementById('music-btn');
+    const playIcon = document.getElementById('play-icon');
+    const musicText = document.getElementById('music-text');
+    let isPlaying = false;
+
+    musicBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        bgMusic.pause();
+        playIcon.textContent = '▶️';
+        musicText.textContent = 'Play Our Song';
+      } else {
+        bgMusic.play();
+        playIcon.textContent = '⏸️';
+        musicText.textContent = 'Pause Song';
+      }
+      isPlaying = !isPlaying;
+    });
+  </script>
+
+</body>
+</html>
