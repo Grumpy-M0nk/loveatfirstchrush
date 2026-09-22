@@ -6,19 +6,34 @@
   <meta name="robots" content="noindex">
   <title>Happy Birthday, Princess!</title>
   
+  <!-- Importing Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  
   <style>
     :root {
-      --primary-color: #ffb6c1; 
-      --bg-color: #fafafa;
-      --text-color: #333;
+      --primary-color: #ff9a9e; 
+      --card-bg: #FFD0B6; 
+      --text-heading: #2c3e50;
+      --text-body: #34495e;
+      --timeline-line: #cbd5e1;
     }
     
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      font-family: 'Open Sans', sans-serif; 
+      color: var(--text-body);
       overflow-x: hidden;
+      
+      /* Soft blush background with an elegant Heart & Floral pattern */
+      background-color: #fffafb;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M25 40.7l-.6-.5C11.5 29.7 8 26 8 20c0-5 4-9 9-9 4.1 0 6.4 2.3 8 4.1 1.6-1.8 3.9-4.1 8-4.1 5 0 9 4 9 9 0 6-3.5 9.7-16.4 20.2l-.6.5z' fill='%23ff9a9e' fill-opacity='0.08'/%3E%3Cpath d='M75 90.7l-.6-.5C61.5 79.7 58 76 58 70c0-5 4-9 9-9 4.1 0 6.4 2.3 8 4.1 1.6-1.8 3.9-4.1 8-4.1 5 0 9 4 9 9 0 6-3.5 9.7-16.4 20.2l-.6.5z' fill='%23ff9a9e' fill-opacity='0.08'/%3E%3Cpath d='M50 20c-1-5-5-9-10-10 5-1 9-5 10-10 1 5 5 9 10 10-5 1-9 5-10 10z' fill='%23ff9a9e' fill-opacity='0.12'/%3E%3Cpath d='M10 70c-1-5-5-9-10-10 5-1 9-5 10-10 1 5 5 9 10 10-5 1-9 5-10 10z' fill='%23ff9a9e' fill-opacity='0.12'/%3E%3Cpath d='M90 70c-1-5-5-9-10-10 5-1 9-5 10-10 1 5 5 9 10 10-5 1-9 5-10 10z' fill='%23ff9a9e' fill-opacity='0.12'/%3E%3C/svg%3E");
+    }
+
+    h1, h2, h3, .date {
+      font-family: 'Montserrat', sans-serif; 
+      color: var(--text-heading);
     }
 
     /* Hero Section */
@@ -30,7 +45,7 @@
       justify-content: center;
       text-align: center;
       color: white;
-      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), 
                   url('banner-image.jpg') center/cover no-repeat;
       padding: 0 20px;
       box-sizing: border-box;
@@ -38,15 +53,17 @@
     
     .hero h1 {
       font-size: 4rem;
-      margin-bottom: 10px;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
       line-height: 1.1;
+      color: white;
     }
 
     .hero p {
       font-size: 1.2rem;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
       line-height: 1.6;
+      font-weight: 600;
     }
 
     /* Floating Music Player */
@@ -64,7 +81,9 @@
       gap: 10px;
       cursor: pointer;
       transition: transform 0.2s ease;
-      font-weight: bold;
+      font-weight: 600;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-heading);
       -webkit-tap-highlight-color: transparent;
     }
     
@@ -75,8 +94,8 @@
     /* Timeline Container */
     .timeline {
       position: relative;
-      max-width: 900px;
-      margin: 50px auto;
+      max-width: 1000px; 
+      margin: 40px auto;
       padding: 20px;
     }
     
@@ -84,26 +103,26 @@
       content: '';
       position: absolute;
       width: 4px;
-      background-color: var(--primary-color);
+      background-color: var(--timeline-line);
       top: 0;
       bottom: 0;
       left: 50%;
       margin-left: -2px;
+      border-radius: 2px;
     }
 
-    /* Memory Blocks - Added Transition Properties */
+    /* Memory Blocks */
     .memory {
-      padding: 20px 40px;
+      padding: 15px 50px; 
       position: relative;
-      background-color: inherit;
+      background-color: transparent;
       width: 50%;
       box-sizing: border-box;
       opacity: 0;
-      transform: translateY(60px);
+      transform: translateY(40px);
       transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     }
     
-    /* When Javascript adds the 'visible' class */
     .memory.visible {
       opacity: 1;
       transform: translateY(0);
@@ -112,32 +131,77 @@
     .memory.left { left: 0; }
     .memory.right { left: 50%; }
 
+    /* The Timeline Dots */
     .memory::after {
       content: '';
       position: absolute;
-      width: 20px;
-      height: 20px;
-      right: -14px;
+      width: 16px;
+      height: 16px;
       background-color: white;
       border: 4px solid var(--primary-color);
-      top: 25px;
+      top: 35px; 
       border-radius: 50%;
       z-index: 1;
-      box-shadow: 0 0 0 4px rgba(255, 182, 193, 0.3);
+      box-shadow: 0 0 0 4px rgba(255, 154, 158, 0.3); 
     }
-    .memory.right::after { left: -14px; }
+    .memory.left::after { right: -12px; }
+    .memory.right::after { left: -12px; }
+
+    /* The Date Labels (Desktop) */
+    .date {
+      position: absolute;
+      top: 36px; 
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      width: 150px;
+    }
+    .memory.left .date {
+      right: -190px;
+      text-align: left;
+    }
+    .memory.right .date {
+      left: -190px;
+      text-align: right;
+    }
 
     /* Content Cards */
     .content {
-      padding: 20px;
-      background-color: white;
+      padding: 25px;
+      background-color: var(--card-bg);
       border-radius: 12px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-      transition: transform 0.3s ease;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
     }
     
     .content:hover {
-      transform: translateY(-5px);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    }
+
+    /* The Pointer / Speech Bubble Arrow */
+    .content::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      width: 0;
+      height: 0;
+      border: 12px solid transparent;
+    }
+    .memory.left .content::before {
+      right: -23px;
+      border-left-color: var(--card-bg);
+    }
+    .memory.right .content::before {
+      left: -23px;
+      border-right-color: var(--card-bg);
+    }
+
+    .content h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
     }
     
     .content img {
@@ -145,20 +209,21 @@
       border-radius: 8px;
       margin-bottom: 15px;
       object-fit: cover;
+      border: 2px solid rgba(255,255,255,0.4); 
     }
 
     /* Typewriter Text Styling */
     .typewriter-text {
-      min-height: 60px; /* Prevents layout shifting as text types */
+      min-height: 60px; 
       line-height: 1.6;
-      color: #555;
+      margin-bottom: 0;
     }
     
     .cursor {
       display: inline-block;
       width: 2px;
       height: 1.2em;
-      background-color: var(--primary-color);
+      background-color: var(--text-body);
       vertical-align: middle;
       animation: blink 0.8s infinite;
       margin-left: 2px;
@@ -175,35 +240,60 @@
       height: 300px;
       border: none;
       border-radius: 8px;
-      margin-top: 15px;
+      margin-top: 10px;
     }
 
     /* Bottom Banner */
     .bottom-banner {
-      background-color: var(--primary-color);
-      color: white;
+      background-color: var(--card-bg);
+      color: var(--text-heading);
       text-align: center;
-      padding: 40px 20px calc(40px + env(safe-area-inset-bottom));
+      padding: 50px 20px calc(50px + env(safe-area-inset-bottom));
       font-size: 1.5rem;
-      font-weight: bold;
-      letter-spacing: 1px;
-      box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.03);
       line-height: 1.5;
+      margin-top: 40px;
     }
 
-    /* Mobile Responsiveness (Optimized for iPhone) */
-    @media screen and (max-width: 768px) {
+    /* Mobile Responsiveness */
+    @media screen and (max-width: 850px) {
       .hero h1 { font-size: 2.5rem; }
       .hero p { font-size: 1rem; }
       
       .timeline::after { left: 24px; }
-      .memory { width: 100%; padding-left: 55px; padding-right: 15px; }
+      
+      .memory { 
+        width: 100%; 
+        padding-left: 60px; 
+        padding-right: 15px; 
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
       .memory.right { left: 0; }
       
-      .memory::after { left: 10px !important; }
+      .memory::after { left: 12px !important; }
       
-      .content { padding: 15px; }
-      .bottom-banner { font-size: 1.2rem; padding-top: 30px; }
+      /* Move dates inside the card layout for mobile */
+      .date {
+        position: relative;
+        top: 0; left: 0 !important; right: 0 !important;
+        width: 100%;
+        text-align: left !important;
+        margin-bottom: 8px;
+        font-size: 1rem;
+      }
+
+      /* Adjust arrows for mobile (all pointing left) */
+      .memory.left .content::before, .memory.right .content::before {
+        left: -23px;
+        right: auto;
+        border-right-color: var(--card-bg);
+        border-left-color: transparent;
+      }
+      
+      .content { padding: 20px; }
     }
   </style>
 </head>
@@ -222,35 +312,37 @@
     <h1>Happy Birthday,<br>My Sakit Kepala!</h1>
     <p>
       As a special gift to you for being such an amazing fiancé,<br/>
-      I wanted to create a timeline for you to look back whenever you want.<br/>
-      One that lives as we live our lives.<br/>
-      A nod to the efforts you took to making cute little websites for me.
+      I wanted to create a timeline for you to look back whenever you want<br/>
+      One that lives as we live our lives<br/>
+      A nod to the efforts you took to making cute little websites for me
     </p>
   </section>
 
   <div class="timeline">
     
     <div class="memory left">
+      <div class="date">Early Days</div>
       <div class="content">
         <h2>The Beginning</h2>
         <img src="first_call.png" alt="First Memory">
-        <!-- Added 'typewriter-text' class here -->
         <p class="typewriter-text">From our first nervous interaction.<br/>Both of us not knowing what to expect.<br/>Plot twist: It was the most fun call I had in a while</p>
       </div>
     </div>
 
     <div class="memory right">
+      <div class="date">A Special Day</div>
       <div class="content">
         <h2>Our first biggest memory in Dubai</h2>
         <p class="typewriter-text">Love Lake<br/>A google maps pin so you remember where it all happened</p>
         <div class="map-container">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.838510845102!2d55.40081227560386!3d24.83519564626756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f814706f7833b%3A0xf002386f582fba3d!2sLove%20Lake!5e0!3m2!1sen!2sid!4v1789936054194!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"> 
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.838510845102!2d55.40081227560386!3d24.83519564626756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f814706f7833b%3A0xf002386f582fba3d!2sLove%20Lake!5e0!3m2!1sen!2sid!4v1789936054194!5m2!1sen!2sid" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"> 
           </iframe>
         </div>
       </div>
     </div>
 
     <div class="memory left">
+      <div class="date">August 31, 2026</div>
       <div class="content">
         <h2>The Proposal</h2>
         <img src="proposal.jpg" alt="Proposal Memory">
@@ -259,6 +351,7 @@
     </div>
 
     <div class="memory right">
+      <div class="date">Just Us</div>
       <div class="content">
         <h2>Funny Picture</h2>
         <img src="funny.jpg" alt="Funny Memory">
@@ -267,6 +360,7 @@
     </div>
 
     <div class="memory left">
+      <div class="date">September 2026</div>
       <div class="content">
         <h2>The big day</h2>
         <img src="engagment.jpg" alt="Engagement Memory">
@@ -282,7 +376,6 @@
   </div>
 
   <script>
-    // 1. Audio Player Logic
     const bgMusic = document.getElementById('bg-music');
     const musicBtn = document.getElementById('music-btn');
     const playIcon = document.getElementById('play-icon');
@@ -302,14 +395,11 @@
       isPlaying = !isPlaying;
     });
 
-    // 2. Setup Typewriter Texts on Load
-    // We grab the HTML, save it as a data attribute, and clear the paragraph so it's ready to be typed.
     document.querySelectorAll('.typewriter-text').forEach(p => {
       p.setAttribute('data-text', p.innerHTML);
       p.innerHTML = '';
     });
 
-    // 3. Typewriter Function
     function typeWriter(element) {
       const htmlContent = element.getAttribute('data-text');
       let i = 0;
@@ -321,7 +411,6 @@
           let char = htmlContent.charAt(i);
           currentHTML += char;
           
-          // Instantly skip through HTML tags like <br/> so they don't print as text
           if (char === '<') isTag = true;
           if (char === '>') isTag = false;
           
@@ -329,30 +418,23 @@
           i++;
           
           if (isTag) {
-            type(); // No delay if it's inside an HTML tag
+            type(); 
           } else {
-            setTimeout(type, 35); // Typing speed in milliseconds
+            setTimeout(type, 35); 
           }
         } else {
-          // Remove the blinking cursor when finished typing
           element.innerHTML = currentHTML; 
         }
       }
       type();
     }
 
-    // 4. Scroll Animation Observer
-    // This watches the cards and triggers the slide-up and typewriter effect when they enter the screen
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // Add the visible class to trigger CSS slide-up animation
           entry.target.classList.add('visible');
-          
-          // Find the text paragraph inside this card
           const pTag = entry.target.querySelector('.typewriter-text');
           
-          // If it hasn't been typed yet, start typing
           if (pTag && pTag.getAttribute('data-typed') !== 'true') {
             typeWriter(pTag);
             pTag.setAttribute('data-typed', 'true');
@@ -360,10 +442,9 @@
         }
       });
     }, { 
-      threshold: 0.2 // Triggers when 20% of the card is visible on screen
+      threshold: 0.15 
     });
 
-    // Attach the observer to all memory cards
     document.querySelectorAll('.memory').forEach(el => observer.observe(el));
 
   </script>
