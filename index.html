@@ -2,15 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Prevents search engines from indexing the free link -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="robots" content="noindex">
   <title>Happy Birthday, Princess!</title>
   
   <style>
-    /* Base Styles & Typography */
     :root {
-      --primary-color: #ffb6c1; /* Soft pink */
+      --primary-color: #ffb6c1; 
       --bg-color: #fafafa;
       --text-color: #333;
     }
@@ -32,41 +30,46 @@
       justify-content: center;
       text-align: center;
       color: white;
-      /* The rgba(0,0,0, 0.5) creates a 50% dark overlay so the text remains readable */
       background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
                   url('banner-image.jpg') center/cover no-repeat;
+      padding: 0 20px;
+      box-sizing: border-box;
     }
     
     .hero h1 {
       font-size: 4rem;
       margin-bottom: 10px;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+      line-height: 1.1;
     }
 
     .hero p {
       font-size: 1.2rem;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+      line-height: 1.6;
     }
 
     /* Floating Music Player */
     .music-player {
       position: fixed;
-      bottom: 30px;
-      right: 30px;
+      bottom: max(30px, env(safe-area-inset-bottom));
+      right: 20px;
       z-index: 1000;
       background: white;
-      padding: 15px;
+      padding: 12px 20px;
       border-radius: 50px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
       display: flex;
       align-items: center;
       gap: 10px;
       cursor: pointer;
       transition: transform 0.2s ease;
+      font-weight: bold;
+      -webkit-tap-highlight-color: transparent;
     }
     
-    .music-player:hover {
-      transform: scale(1.05);
+    .music-player:active {
+      transform: scale(0.95);
     }
 
     /* Timeline Container */
@@ -77,7 +80,6 @@
       padding: 20px;
     }
     
-    /* The Center Line */
     .timeline::after {
       content: '';
       position: absolute;
@@ -89,45 +91,82 @@
       margin-left: -2px;
     }
 
-    /* Memory Blocks */
+    /* Memory Blocks - Added Transition Properties */
     .memory {
       padding: 20px 40px;
       position: relative;
       background-color: inherit;
       width: 50%;
       box-sizing: border-box;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    
+    /* When Javascript adds the 'visible' class */
+    .memory.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     
     .memory.left { left: 0; }
     .memory.right { left: 50%; }
 
-    /* Timeline Dots */
     .memory::after {
       content: '';
       position: absolute;
       width: 20px;
       height: 20px;
-      right: -10px;
+      right: -14px;
       background-color: white;
       border: 4px solid var(--primary-color);
       top: 25px;
       border-radius: 50%;
       z-index: 1;
+      box-shadow: 0 0 0 4px rgba(255, 182, 193, 0.3);
     }
-    .memory.right::after { left: -10px; }
+    .memory.right::after { left: -14px; }
 
     /* Content Cards */
     .content {
       padding: 20px;
       background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease;
+    }
+    
+    .content:hover {
+      transform: translateY(-5px);
     }
     
     .content img {
       width: 100%;
-      border-radius: 5px;
+      border-radius: 8px;
       margin-bottom: 15px;
+      object-fit: cover;
+    }
+
+    /* Typewriter Text Styling */
+    .typewriter-text {
+      min-height: 60px; /* Prevents layout shifting as text types */
+      line-height: 1.6;
+      color: #555;
+    }
+    
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.2em;
+      background-color: var(--primary-color);
+      vertical-align: middle;
+      animation: blink 0.8s infinite;
+      margin-left: 2px;
+    }
+    
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
 
     /* Map Container */
@@ -135,7 +174,7 @@
       width: 100%;
       height: 300px;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       margin-top: 15px;
     }
 
@@ -144,64 +183,66 @@
       background-color: var(--primary-color);
       color: white;
       text-align: center;
-      padding: 40px 20px;
-      font-size: 2rem;
+      padding: 40px 20px calc(40px + env(safe-area-inset-bottom));
+      font-size: 1.5rem;
       font-weight: bold;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
       box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+      line-height: 1.5;
     }
 
-    /* Mobile Responsiveness */
+    /* Mobile Responsiveness (Optimized for iPhone) */
     @media screen and (max-width: 768px) {
-      .timeline::after { left: 31px; }
-      .memory { width: 100%; padding-left: 70px; padding-right: 25px; }
+      .hero h1 { font-size: 2.5rem; }
+      .hero p { font-size: 1rem; }
+      
+      .timeline::after { left: 24px; }
+      .memory { width: 100%; padding-left: 55px; padding-right: 15px; }
       .memory.right { left: 0; }
-      .memory.left::after, .memory.right::after { left: 21px; }
+      
+      .memory::after { left: 10px !important; }
+      
+      .content { padding: 15px; }
+      .bottom-banner { font-size: 1.2rem; padding-top: 30px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Background Music Audio Tag -->
   <audio id="bg-music" loop>
-    <!-- Replace with your actual music file path -->
     <source src="our-song.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Floating Music Toggle -->
   <div class="music-player" id="music-btn">
     <span id="play-icon">▶️</span>
     <span id="music-text">Play Our Song</span>
   </div>
 
   <section class="hero">
-    <h1>Happy Birthday, My Sakit Kepala!</h1>
+    <h1>Happy Birthday,<br>My Sakit Kepala!</h1>
     <p>
       As a special gift to you for being such an amazing fiancé,<br/>
-      I wanted to create a timeline for you to look back whenever you want<br/>
-      One that lives as we live our lives<br/>
-      A nod to the efforts you took to making cute little websites for me
+      I wanted to create a timeline for you to look back whenever you want.<br/>
+      One that lives as we live our lives.<br/>
+      A nod to the efforts you took to making cute little websites for me.
     </p>
   </section>
 
   <div class="timeline">
     
-    <!-- Memory 1: A Standard Photo -->
     <div class="memory left">
       <div class="content">
         <h2>The Beginning</h2>
-        <!-- Plugin your picture here -->
         <img src="first_call.png" alt="First Memory">
-        <p>From our first nervous interaction.<br/>Both of us not knowing what to expect.<br/>Plot twist: It was the most fun call I had in a while</p>
+        <!-- Added 'typewriter-text' class here -->
+        <p class="typewriter-text">From our first nervous interaction.<br/>Both of us not knowing what to expect.<br/>Plot twist: It was the most fun call I had in a while</p>
       </div>
     </div>
 
-    <!-- Memory 2: Location / Map Embed -->
     <div class="memory right">
       <div class="content">
         <h2>Our first biggest memory in Dubai</h2>
-        <p>Love Lake<br/>A google maps pin so you remember where it all happened</p>
-        <!-- Plugin your Google Maps Embed iframe here -->
+        <p class="typewriter-text">Love Lake<br/>A google maps pin so you remember where it all happened</p>
         <div class="map-container">
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.838510845102!2d55.40081227560386!3d24.83519564626756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f814706f7833b%3A0xf002386f582fba3d!2sLove%20Lake!5e0!3m2!1sen!2sid!4v1789936054194!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"> 
           </iframe>
@@ -209,43 +250,39 @@
       </div>
     </div>
 
-    <!-- Memory 3: Another Photo -->
     <div class="memory left">
       <div class="content">
         <h2>The Proposal</h2>
-        <img src="proposal.jpg" alt="Adventure Memory">
-        <p>One of the happiest days of my life<br/>Well worth all the stress and effort.</p>
+        <img src="proposal.jpg" alt="Proposal Memory">
+        <p class="typewriter-text">One of the happiest days of my life<br/>Well worth all the stress and effort.</p>
       </div>
     </div>
 
-    <!-- Memory 4 (New) -->
     <div class="memory right">
       <div class="content">
         <h2>Funny Picture</h2>
-        <img src="funny.jpg" alt="Trip Memory">
-        <p>Cause the best memories are the funny ones :3</p>
+        <img src="funny.jpg" alt="Funny Memory">
+        <p class="typewriter-text">Cause the best memories are the funny ones :3</p>
       </div>
     </div>
 
-    <!-- Memory 5 (New) -->
     <div class="memory left">
       <div class="content">
         <h2>The big day</h2>
-        <img src="engagment.jpg" alt="Everyday Memory">
-        <p>A day we celebrated our love with everyone who loves us</br>The drama, stress, misunderstanding only brought us closer</p>
+        <img src="engagment.jpg" alt="Engagement Memory">
+        <p class="typewriter-text">A day we celebrated our love with everyone who loves us<br/>The drama, stress, misunderstanding only brought us closer</p>
       </div>
     </div>
 
   </div>
 
-  <!-- Bottom Banner -->
   <div class="bottom-banner">
-    More coming soon! ❤️
+    More coming soon! ❤️<br/>
     Since we chose each other for life ;)
   </div>
 
   <script>
-    // Custom JS to handle the background music player
+    // 1. Audio Player Logic
     const bgMusic = document.getElementById('bg-music');
     const musicBtn = document.getElementById('music-btn');
     const playIcon = document.getElementById('play-icon');
@@ -264,7 +301,71 @@
       }
       isPlaying = !isPlaying;
     });
-  </script>
 
+    // 2. Setup Typewriter Texts on Load
+    // We grab the HTML, save it as a data attribute, and clear the paragraph so it's ready to be typed.
+    document.querySelectorAll('.typewriter-text').forEach(p => {
+      p.setAttribute('data-text', p.innerHTML);
+      p.innerHTML = '';
+    });
+
+    // 3. Typewriter Function
+    function typeWriter(element) {
+      const htmlContent = element.getAttribute('data-text');
+      let i = 0;
+      let isTag = false;
+      let currentHTML = '';
+      
+      function type() {
+        if (i < htmlContent.length) {
+          let char = htmlContent.charAt(i);
+          currentHTML += char;
+          
+          // Instantly skip through HTML tags like <br/> so they don't print as text
+          if (char === '<') isTag = true;
+          if (char === '>') isTag = false;
+          
+          element.innerHTML = currentHTML + '<span class="cursor"></span>';
+          i++;
+          
+          if (isTag) {
+            type(); // No delay if it's inside an HTML tag
+          } else {
+            setTimeout(type, 35); // Typing speed in milliseconds
+          }
+        } else {
+          // Remove the blinking cursor when finished typing
+          element.innerHTML = currentHTML; 
+        }
+      }
+      type();
+    }
+
+    // 4. Scroll Animation Observer
+    // This watches the cards and triggers the slide-up and typewriter effect when they enter the screen
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Add the visible class to trigger CSS slide-up animation
+          entry.target.classList.add('visible');
+          
+          // Find the text paragraph inside this card
+          const pTag = entry.target.querySelector('.typewriter-text');
+          
+          // If it hasn't been typed yet, start typing
+          if (pTag && pTag.getAttribute('data-typed') !== 'true') {
+            typeWriter(pTag);
+            pTag.setAttribute('data-typed', 'true');
+          }
+        }
+      });
+    }, { 
+      threshold: 0.2 // Triggers when 20% of the card is visible on screen
+    });
+
+    // Attach the observer to all memory cards
+    document.querySelectorAll('.memory').forEach(el => observer.observe(el));
+
+  </script>
 </body>
 </html>
