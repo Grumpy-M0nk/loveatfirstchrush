@@ -3,124 +3,781 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- Prevents search engines from indexing the private link -->
   <meta name="robots" content="noindex">
   <title>Happy Birthday, Princess!</title>
   
-  <!-- Importing Google Fonts -->
+  <!-- Google Fonts: Montserrat for Headings/Dates & Open Sans for Body -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   
+  <script>
+    // Defined in <head> so it is available immediately when <img> onerror fires during HTML parsing
+    function getFallbackSVG(type) {
+      const configs = {
+        call: {
+          bg1: '#ff9a9e', bg2: '#fecfef',
+          icon: '📱 💬 ❤️ 📱',
+          title: 'first_call.png',
+          sub: 'December 25 • First Call'
+        },
+        maps: {
+          bg1: '#a1c4fd', bg2: '#c2e9fb',
+          icon: '📍 🦢 💖 🗺️',
+          title: 'maps.png',
+          sub: 'Love Lake, Dubai (Tap to Open Map)'
+        },
+        proposal: {
+          bg1: '#fbc2eb', bg2: '#a6c1ee',
+          icon: '🎈 💍 ✨ 🎈',
+          title: 'proposal.jpg',
+          sub: 'August 31, 2026 • The Proposal'
+        },
+        funny: {
+          bg1: '#ffecd2', bg2: '#fcb69f',
+          icon: '🤪 📸 😂 ❤️',
+          title: 'funny.jpg',
+          sub: 'Our Goofy Moments :3'
+        },
+        engagement: {
+          bg1: '#ff9a9e', bg2: '#fecfef',
+          icon: '🥂 💍 💐 🎉',
+          title: 'engagment.jpg',
+          sub: 'September 12, 2026 • The Big Day'
+        }
+      };
+      const c = configs[type] || configs.call;
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="450" viewBox="0 0 600 450">
+        <defs>
+          <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="${c.bg1}"/>
+            <stop offset="100%" stop-color="${c.bg2}"/>
+          </linearGradient>
+        </defs>
+        <rect width="600" height="450" fill="url(#g)"/>
+        <circle cx="300" cy="210" r="130" fill="rgba(255,255,255,0.35)"/>
+        <text x="300" y="195" font-family="Montserrat, sans-serif" font-size="48" text-anchor="middle">${c.icon}</text>
+        <text x="300" y="255" font-family="Montserrat, sans-serif" font-weight="700" font-size="22" fill="#2c222e" text-anchor="middle">${c.sub}</text>
+        <text x="300" y="290" font-family="Open Sans, sans-serif" font-size="15" fill="#4a3b4e" text-anchor="middle">(Uses your '${c.title}' photo)</text>
+      </svg>`;
+      return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    }
+  </script>
+
   <style>
     :root {
-      --primary-color: #ff9a9e; 
-      --card-bg: #FFD0B6; 
-      --text-heading: #2c3e50;
-      --text-body: #34495e;
-      --timeline-line: #cbd5e1;
+      --primary-color: #e86f88;       /* Deep romantic rose pink */
+      --primary-light: #ff9a9e;       /* Soft blush pink */
+      --card-bg: #FFD0B6;             /* Requested soft peach card background */
+      --card-bg-light: #ffe4d4;       /* Lighter peach tint for inner highlights */
+      --text-heading: #2c3e50;        /* Deep slate for headings */
+      --text-body: #34495e;           /* Warm dark slate for body readability */
+      --timeline-track: #cbd5e1;      /* Unfilled timeline line */
+      --polaroid-bg: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
     
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: 'Open Sans', sans-serif; 
       color: var(--text-body);
       overflow-x: hidden;
-      
-      /* Soft blush background with an elegant Heart & Floral pattern */
+      /* Soft blush background with your custom Heart & Sparkle pattern */
       background-color: #fffafb;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M25 40.7l-.6-.5C11.5 29.7 8 26 8 20c0-5 4-9 9-9 4.1 0 6.4 2.3 8 4.1 1.6-1.8 3.9-4.1 8-4.1 5 0 9 4 9 9 0 6-3.5 9.7-16.4 20.2l-.6.5z' fill='%23ff9a9e' fill-opacity='0.08'/%3E%3Cpath d='M75 90.7l-.6-.5C61.5 79.7 58 76 58 70c0-5 4-9 9-9 4.1 0 6.4 2.3 8 4.1 1.6-1.8 3.9-4.1 8-4.1 5 0 9 4 9 9 0 6-3.5 9.7-16.4 20.2l-.6.5z' fill='%23ff9a9e' fill-opacity='0.08'/%3E%3Cpath d='M50 20c-1-5-5-9-10-10 5-1 9-5 10-10 1 5 5 9 10 10-5 1-9 5-10 10z' fill='%23ff9a9e' fill-opacity='0.12'/%3E%3Cpath d='M10 70c-1-5-5-9-10-10 5-1 9-5 10-10 1 5 5 9 10 10-5 1-9 5-10 10z' fill='%23ff9a9e' fill-opacity='0.12'/%3E%3Cpath d='M90 70c-1-5-5-9-10-10 5-1 9-5 10-10 1 5 5 9 10 10-5 1-9 5-10 10z' fill='%23ff9a9e' fill-opacity='0.12'/%3E%3C/svg%3E");
+      position: relative;
     }
 
-    h1, h2, h3, .date {
+    h1, h2, h3, h4, .date, .ui-font {
       font-family: 'Montserrat', sans-serif; 
       color: var(--text-heading);
     }
 
-    /* Hero Section */
-    .hero {
+    /* ==========================================================================
+       FLOATING PETALS & HEARTS BACKGROUND CANVAS
+       ========================================================================== */
+    #petals-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
       height: 100vh;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* ==========================================================================
+       HERO SECTION WITH FROSTED GLASS CARD & BOUNCING SCROLL INDICATOR
+       ========================================================================== */
+    .hero {
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
       color: white;
-      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), 
-                  url('banner-image.jpg') center/cover no-repeat;
-      padding: 0 20px;
-      box-sizing: border-box;
+      background: 
+        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+        url('banner-image.jpg') center/cover no-repeat,
+        radial-gradient(circle at 50% 30%, #ff9a9e 0%, #fecfef 35%, #a18cd1 75%, #3b2645 100%);
+      padding: 60px 20px;
+      position: relative;
+      z-index: 3;
+      overflow: hidden;
+    }
+
+    .hero-glass-box {
+      background-color: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 32px 36px;
+      border-radius: 24px;
+      max-width: 760px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+      animation: fadeUp 1s ease-out;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255, 208, 182, 0.28);
+      border: 1px solid rgba(255, 208, 182, 0.7);
+      color: #FFD0B6;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 7px 18px;
+      border-radius: 50px;
+      margin-bottom: 18px;
     }
     
     .hero h1 {
-      font-size: 4rem;
-      margin-bottom: 15px;
+      font-size: clamp(2.3rem, 6vw, 4rem);
+      margin: 0 0 16px;
       text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
-      line-height: 1.1;
+      line-height: 1.15;
       color: white;
     }
 
-    .hero p {
-      font-size: 1.2rem;
-      text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
-      line-height: 1.6;
-      font-weight: 600;
+    .hero h1 span {
+      color: #FFD0B6;
+      display: inline-block;
     }
 
-    /* Floating Music Player */
-    .music-player {
-      position: fixed;
-      bottom: max(30px, env(safe-area-inset-bottom));
-      right: 20px;
-      z-index: 1000;
-      background: white;
-      padding: 12px 20px;
-      border-radius: 50px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    .hero p {
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+      line-height: 1.65;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.96);
+      margin: 0;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: #FFD0B6;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      animation: bounceSlow 2.2s infinite;
+      cursor: pointer;
+    }
+
+    .scroll-heart {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 208, 182, 0.25);
+      border: 1.5px solid #FFD0B6;
       display: flex;
       align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-      font-weight: 600;
-      font-family: 'Montserrat', sans-serif;
-      color: var(--text-heading);
-      -webkit-tap-highlight-color: transparent;
-    }
-    
-    .music-player:active {
-      transform: scale(0.95);
+      justify-content: center;
+      font-size: 1.1rem;
+      box-shadow: 0 0 15px rgba(255, 208, 182, 0.4);
     }
 
-    /* Timeline Container */
-    .timeline {
-      position: relative;
-      max-width: 1000px; 
-      margin: 40px auto;
-      padding: 20px;
+    @keyframes bounceSlow {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
     }
-    
-    .timeline::after {
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(25px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       FEATURE 1: INTERACTIVE "OUR SPECIAL DATES" ROMANTIC CALENDAR
+       ========================================================================== */
+    .calendar-section {
+      position: relative;
+      z-index: 3;
+      max-width: 960px;
+      margin: 55px auto 20px;
+      padding: 0 20px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .section-eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--primary-color);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      margin: 0 0 8px;
+    }
+
+    .section-header p {
+      margin: 0;
+      color: #6b5b6e;
+      font-size: 0.98rem;
+    }
+
+    .calendar-showcase {
+      background: var(--card-bg);
+      border-radius: 22px;
+      padding: 26px;
+      box-shadow: 0 14px 40px rgba(232, 111, 136, 0.14), inset 0 1px 0 rgba(255,255,255,0.6);
+      position: relative;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+    }
+
+    /* Notebook / Calendar Top Rings Decoration */
+    .calendar-rings {
+      display: flex;
+      justify-content: space-around;
+      max-width: 70%;
+      margin: -38px auto 16px;
+      pointer-events: none;
+    }
+
+    .ring {
+      width: 14px;
+      height: 28px;
+      background: linear-gradient(180deg, #e2e8f0, #94a3b8, #cbd5e1);
+      border-radius: 8px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+
+    /* Interactive Milestone Pills Bar */
+    .milestone-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .milestone-pill {
+      background: rgba(255, 255, 255, 0.85);
+      border: 2px solid transparent;
+      border-radius: 50px;
+      padding: 8px 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.25s ease;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+
+    .milestone-pill:hover {
+      transform: translateY(-2px);
+      background: white;
+      border-color: var(--primary-color);
+    }
+
+    .milestone-pill.active {
+      background: var(--primary-color);
+      color: white;
+      box-shadow: 0 6px 16px rgba(232, 111, 136, 0.35);
+    }
+
+    .pill-heart {
+      display: inline-block;
+      animation: heartBeat 1.4s infinite;
+    }
+
+    /* Dual Calendar Grid + Active Memory Preview */
+    .calendar-body {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .calendar-sheet {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+    }
+
+    .calendar-month-tabs {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px dashed #fce7f3;
+    }
+
+    .month-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--text-heading);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .month-switch-btns {
+      display: flex;
+      gap: 6px;
+    }
+
+    .month-tab-btn {
+      border: 1px solid #f1d4d4;
+      background: #fff5f7;
+      color: var(--text-heading);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 5px 11px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .month-tab-btn.active {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+
+    .days-header, .days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      gap: 4px;
+    }
+
+    .days-header span {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #94a3b8;
+      padding: 4px 0 8px;
+    }
+
+    .day-cell {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #475569;
+      border-radius: 50%;
+      position: relative;
+      user-select: none;
+    }
+
+    .day-cell.empty {
+      visibility: hidden;
+    }
+
+    .day-cell.special-day {
+      background: #ffe4e6;
+      color: var(--primary-color);
+      font-weight: 800;
+      cursor: pointer;
+      border: 2px solid var(--primary-color);
+      box-shadow: 0 0 0 4px rgba(232, 111, 136, 0.2);
+      animation: pulseRing 2s infinite;
+      transition: transform 0.2s ease;
+    }
+
+    .day-cell.special-day:hover {
+      transform: scale(1.15);
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .day-cell.special-day::after {
+      content: '❤️';
+      position: absolute;
+      top: -8px;
+      right: -6px;
+      font-size: 0.75rem;
+    }
+
+    @keyframes pulseRing {
+      0% { box-shadow: 0 0 0 0 rgba(232, 111, 136, 0.5); }
+      70% { box-shadow: 0 0 0 8px rgba(232, 111, 136, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(232, 111, 136, 0); }
+    }
+
+    /* Calendar Spotlight Preview Card */
+    .calendar-spotlight {
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+      border-left: 5px solid var(--primary-color);
+    }
+
+    .spotlight-badge {
+      display: inline-block;
+      background: #ffe4e6;
+      color: var(--primary-color);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 8px;
+      width: fit-content;
+    }
+
+    .calendar-spotlight h3 {
+      margin: 0 0 8px;
+      font-size: 1.25rem;
+    }
+
+    .calendar-spotlight p {
+      margin: 0 0 16px;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: #555;
+    }
+
+    .jump-to-memory-btn {
+      background: linear-gradient(135deg, var(--primary-color), #ff8da1);
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 12px rgba(232, 111, 136, 0.3);
+    }
+
+    .jump-to-memory-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(232, 111, 136, 0.45);
+    }
+
+    /* ==========================================================================
+       FEATURE 2 & 3: POLAROID FRAMES, HANGING THREADS, PINS & 3D FLIP
+       ========================================================================== */
+    .polaroid-wrapper {
+      perspective: 1200px;
+      margin-bottom: 18px;
+      position: relative;
+      transform-origin: top center;
+    }
+
+    /* Pendulum swing animation when card becomes visible or hovered */
+    .memory.visible .polaroid-wrapper {
+      animation: pendulumSwing 2.4s ease-in-out forwards;
+    }
+    .memory:nth-child(even).visible .polaroid-wrapper {
+      animation: pendulumSwingEven 2.4s ease-in-out forwards;
+    }
+
+    .polaroid-wrapper:hover {
+      animation: gentleWiggle 1.2s ease-in-out infinite !important;
+    }
+
+    @keyframes pendulumSwing {
+      0% { transform: rotate(8deg); }
+      30% { transform: rotate(-5deg); }
+      60% { transform: rotate(3deg); }
+      80% { transform: rotate(-2.5deg); }
+      100% { transform: rotate(-1.5deg); }
+    }
+
+    @keyframes pendulumSwingEven {
+      0% { transform: rotate(-8deg); }
+      30% { transform: rotate(5deg); }
+      60% { transform: rotate(-3deg); }
+      80% { transform: rotate(2.5deg); }
+      100% { transform: rotate(1.8deg); }
+    }
+
+    @keyframes gentleWiggle {
+      0%, 100% { transform: rotate(-1.5deg) scale(1.01); }
+      50% { transform: rotate(1.8deg) scale(1.01); }
+    }
+
+    /* Hanging Thread & Wooden Clothespin (Visible in Mode 1 & Mode 2) */
+    .hanging-hardware {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: -8px;
+      position: relative;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .twine-thread {
+      width: 2px;
+      height: 28px;
+      background: repeating-linear-gradient(
+        45deg,
+        #d4a373,
+        #d4a373 3px,
+        #a97142 3px,
+        #a97142 6px
+      );
+    }
+
+    .wooden-clip {
+      width: 14px;
+      height: 26px;
+      background: linear-gradient(90deg, #deb887, #c89d66);
+      border-radius: 3px;
+      border: 1px solid #a67b4b;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    /* Metal spring on clothespin + warm fairy light glow */
+    .wooden-clip::before {
       content: '';
       position: absolute;
+      top: 9px;
+      left: -2px;
+      right: -2px;
+      height: 4px;
+      background: #94a3b8;
+      border-radius: 2px;
+    }
+
+    .fairy-bulb {
+      position: absolute;
+      top: -6px;
+      right: -10px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #fffbeb;
+      box-shadow: 0 0 10px 4px rgba(253, 224, 71, 0.85);
+      animation: twinkle 2s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.65; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1.15); }
+    }
+
+    /* 3D Flipping Polaroid Frame */
+    .polaroid-card {
+      background: var(--polaroid-bg);
+      padding: 12px 12px 38px 12px;
+      border-radius: 6px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.06);
+      position: relative;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.75s cubic-bezier(0.4, 0.2, 0.2, 1);
+    }
+
+    .polaroid-card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .polaroid-front, .polaroid-back {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    .polaroid-front img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 3px;
+      display: block;
+      background: #fff0f3;
+    }
+
+    .polaroid-caption-bar {
+      position: absolute;
+      bottom: 8px;
+      left: 14px;
+      right: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #7c6f7e;
+    }
+
+    .flip-hint {
+      background: #fff0f3;
+      color: var(--primary-color);
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Back of the Polaroid (Secret Romantic Note) */
+    .polaroid-back {
+      position: absolute;
+      inset: 0;
+      background: #fffdf9;
+      background-image: repeating-linear-gradient(transparent, transparent 27px, #f1e4e8 28px);
+      border-radius: 6px;
+      padding: 24px 20px;
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border: 8px solid white;
+      box-shadow: inset 0 0 20px rgba(255, 182, 193, 0.25);
+    }
+
+    .secret-note-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+      background: #ffe4e6;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .secret-note-text {
+      font-family: 'Open Sans', sans-serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 0.98rem;
+      line-height: 1.6;
+      color: #3d313f;
+      margin: 0 0 12px;
+    }
+
+    /* ==========================================================================
+       TIMELINE LAYOUT (MODE 1 DEFAULT) & DYNAMIC SCROLL PROGRESS LINE
+       ========================================================================== */
+    .memories-container {
+      position: relative;
+      z-index: 3;
+      max-width: 1020px;
+      margin: 25px auto 50px;
+      padding: 20px;
+      transition: all 0.4s ease;
+    }
+    
+    /* Background Track Line */
+    .timeline-line-track {
+      position: absolute;
       width: 4px;
-      background-color: var(--timeline-line);
+      background-color: var(--timeline-track);
       top: 0;
       bottom: 0;
       left: 50%;
       margin-left: -2px;
-      border-radius: 2px;
+      border-radius: 4px;
+      z-index: 0;
     }
 
-    /* Memory Blocks */
+    /* Glowing Dynamic Scroll Progress Line */
+    .timeline-line-progress {
+      position: absolute;
+      width: 4px;
+      background: linear-gradient(180deg, var(--primary-color), #ff758c, #ffb6c1);
+      top: 0;
+      height: 0%;
+      left: 50%;
+      margin-left: -2px;
+      border-radius: 4px;
+      z-index: 0;
+      box-shadow: 0 0 12px rgba(232, 111, 136, 0.6);
+      transition: height 0.15s ease-out;
+    }
+
+    /* Memory Blocks - Reduced vertical spacing so cards sit closer on desktop */
     .memory {
-      padding: 15px 50px; 
+      padding: 8px 46px;
+      margin-bottom: -15px;
       position: relative;
       background-color: transparent;
       width: 50%;
-      box-sizing: border-box;
       opacity: 0;
-      transform: translateY(40px);
+      transform: translateY(45px);
       transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      z-index: 2;
+    }
+
+    .memory:first-of-type {
+      margin-top: 0;
     }
     
     .memory.visible {
@@ -131,102 +788,145 @@
     .memory.left { left: 0; }
     .memory.right { left: 50%; }
 
-    /* The Timeline Dots */
-    .memory::after {
-      content: '';
+    /* Pulsing Heart Node on the Timeline */
+    .timeline-heart-node {
       position: absolute;
-      width: 16px;
-      height: 16px;
+      width: 34px;
+      height: 34px;
       background-color: white;
-      border: 4px solid var(--primary-color);
-      top: 35px; 
+      border: 3px solid var(--primary-color);
+      top: 38px; 
       border-radius: 50%;
-      z-index: 1;
-      box-shadow: 0 0 0 4px rgba(255, 154, 158, 0.3); 
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      box-shadow: 0 0 0 5px rgba(232, 111, 136, 0.2);
+      animation: heartBeat 2s infinite;
     }
-    .memory.left::after { right: -12px; }
-    .memory.right::after { left: -12px; }
+    .memory.left .timeline-heart-node { right: -17px; }
+    .memory.right .timeline-heart-node { left: -17px; }
 
-    /* The Date Labels (Desktop) */
-    .date {
-      position: absolute;
-      top: 36px; 
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--primary-color);
-      width: 150px;
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.18); }
+      30% { transform: scale(0.95); }
+      45% { transform: scale(1.1); }
     }
-    .memory.left .date {
-      right: -190px;
+
+    /* Facebook-Style Date Pill on Opposite Side of Timeline (Desktop) */
+    .date-badge-wrapper {
+      position: absolute;
+      top: 38px;
+      width: 185px;
+      z-index: 2;
+    }
+    .memory.left .date-badge-wrapper {
+      right: -215px;
       text-align: left;
     }
-    .memory.right .date {
-      left: -190px;
+    .memory.right .date-badge-wrapper {
+      left: -215px;
       text-align: right;
     }
 
-    /* Content Cards */
+    .date {
+      display: inline-block;
+      background: white;
+      color: var(--primary-color);
+      font-size: 0.88rem;
+      font-weight: 800;
+      padding: 7px 16px;
+      border-radius: 50px;
+      box-shadow: 0 4px 14px rgba(232, 111, 136, 0.16);
+      border: 1.5px solid #ffd0b6;
+      letter-spacing: 0.3px;
+    }
+
+    /* #FFD0B6 Content Cards */
     .content {
-      padding: 25px;
+      padding: 22px 24px;
       background-color: var(--card-bg);
-      border-radius: 12px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(180, 100, 80, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.65);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
+      border: 1.5px solid rgba(255, 255, 255, 0.6);
     }
     
     .content:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(180, 100, 80, 0.18);
     }
 
-    /* The Pointer / Speech Bubble Arrow */
+    /* Highlight pulse when jumped to from the Calendar */
+    .content.spotlight-pulse {
+      animation: cardHighlight 1.8s ease;
+    }
+
+    @keyframes cardHighlight {
+      0%, 100% { box-shadow: 0 10px 30px rgba(180, 100, 80, 0.12); }
+      50% { box-shadow: 0 0 0 8px rgba(232, 111, 136, 0.45), 0 16px 40px rgba(232, 111, 136, 0.3); }
+    }
+
+    /* Speech Bubble Arrow Connecting Card to Timeline */
     .content::before {
       content: '';
       position: absolute;
-      top: 20px;
+      top: 24px;
       width: 0;
       height: 0;
       border: 12px solid transparent;
     }
     .memory.left .content::before {
-      right: -23px;
+      right: -24px;
       border-left-color: var(--card-bg);
     }
     .memory.right .content::before {
-      left: -23px;
+      left: -24px;
       border-right-color: var(--card-bg);
     }
 
-    .content h2 {
-      margin-top: 0;
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-    }
-    
-    .content img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      object-fit: cover;
-      border: 2px solid rgba(255,255,255,0.4); 
+    .card-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
     }
 
-    /* Typewriter Text Styling */
+    .content h2 {
+      margin: 0;
+      font-size: 1.35rem;
+      line-height: 1.25;
+    }
+
+    /* Typewriter Text Box */
+    .typewriter-box {
+      background: rgba(255, 255, 255, 0.58);
+      border-radius: 10px;
+      padding: 12px 15px;
+      position: relative;
+    }
+
     .typewriter-text {
-      min-height: 60px; 
-      line-height: 1.6;
-      margin-bottom: 0;
+      min-height: 54px; 
+      line-height: 1.65;
+      margin: 0;
+      font-size: 0.96rem;
+      color: var(--text-body);
+      font-weight: 600;
     }
     
     .cursor {
       display: inline-block;
-      width: 2px;
-      height: 1.2em;
-      background-color: var(--text-body);
+      width: 2.5px;
+      height: 1.15em;
+      background-color: var(--primary-color);
       vertical-align: middle;
       animation: blink 0.8s infinite;
-      margin-left: 2px;
+      margin-left: 3px;
     }
     
     @keyframes blink {
@@ -234,83 +934,211 @@
       50% { opacity: 0; }
     }
 
-    /* Map Container */
-    .map-container iframe {
-      width: 100%;
-      height: 300px;
-      border: none;
-      border-radius: 8px;
-      margin-top: 10px;
+    /* Clickable Map Polaroid Link Styling */
+    .map-link-wrapper {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .map-pin-badge {
+      background: #ffe4e6;
+      color: var(--primary-color);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .map-link-wrapper:hover .map-pin-badge {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    /* ==========================================================================
+       FLOATING VINYL MUSIC PLAYER & BOTTOM BANNER
+       ========================================================================== */
+    .music-player {
+      position: fixed;
+      bottom: max(24px, env(safe-area-inset-bottom));
+      right: 20px;
+      z-index: 1500;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 10px 18px 10px 12px;
+      border-radius: 50px;
+      box-shadow: 0 8px 25px rgba(232, 111, 136, 0.28), 0 0 0 2px #FFD0B6;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      font-weight: 700;
+      font-size: 0.85rem;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-heading);
+    }
+    
+    .music-player:hover {
+      transform: translateY(-2px) scale(1.03);
+    }
+
+    .music-player:active {
+      transform: scale(0.96);
+    }
+
+    .vinyl-disc {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--primary-color) 0%, var(--primary-color) 28%, #1e293b 30%, #334155 45%, #0f172a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.7rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .music-player.playing .vinyl-disc {
+      animation: spinVinyl 3s linear infinite;
+    }
+
+    @keyframes spinVinyl {
+      100% { transform: rotate(360deg); }
+    }
+
+    .equalizer {
+      display: none;
+      align-items: flex-end;
+      gap: 2px;
+      height: 14px;
+    }
+
+    .music-player.playing .equalizer {
+      display: flex;
+    }
+
+    .eq-bar {
+      width: 3px;
+      background: var(--primary-color);
+      border-radius: 2px;
+      animation: eqBounce 0.6s infinite ease-in-out alternate;
+    }
+    .eq-bar:nth-child(1) { height: 6px; animation-delay: 0.1s; }
+    .eq-bar:nth-child(2) { height: 13px; animation-delay: 0.3s; }
+    .eq-bar:nth-child(3) { height: 8px; animation-delay: 0.2s; }
+
+    @keyframes eqBounce {
+      0% { height: 4px; }
+      100% { height: 14px; }
     }
 
     /* Bottom Banner */
     .bottom-banner {
+      position: relative;
+      z-index: 3;
       background-color: var(--card-bg);
       color: var(--text-heading);
       text-align: center;
-      padding: 50px 20px calc(50px + env(safe-area-inset-bottom));
-      font-size: 1.5rem;
+      padding: 55px 20px calc(55px + env(safe-area-inset-bottom));
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.03);
-      line-height: 1.5;
+      box-shadow: 0 -6px 25px rgba(232, 111, 136, 0.1);
+      line-height: 1.6;
       margin-top: 40px;
+      border-top: 3px solid rgba(255,255,255,0.7);
     }
 
-    /* Mobile Responsiveness */
+    /* ==========================================================================
+       MOBILE & iPHONE OPTIMIZATION
+       ========================================================================== */
     @media screen and (max-width: 850px) {
-      .hero h1 { font-size: 2.5rem; }
-      .hero p { font-size: 1rem; }
-      
-      .timeline::after { left: 24px; }
+      .hero-glass-box {
+        padding: 24px 18px;
+      }
+
+      .calendar-body {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-line-track,
+      .timeline-line-progress {
+        left: 26px;
+      }
       
       .memory { 
         width: 100%; 
-        padding-left: 60px; 
-        padding-right: 15px; 
-        padding-top: 20px;
-        padding-bottom: 20px;
+        padding-left: 58px; 
+        padding-right: 12px; 
+        padding-top: 12px;
+        padding-bottom: 16px;
+        margin-bottom: 0;
       }
       .memory.right { left: 0; }
       
-      .memory::after { left: 12px !important; }
+      .timeline-heart-node {
+        left: 9px !important;
+        right: auto !important;
+        top: 28px;
+      }
       
-      /* Move dates inside the card layout for mobile */
-      .date {
+      /* Stack Dates cleanly at the top of each card on iPhone/Mobile */
+      .date-badge-wrapper {
         position: relative;
-        top: 0; left: 0 !important; right: 0 !important;
+        top: 0;
+        left: 0 !important;
+        right: 0 !important;
         width: 100%;
         text-align: left !important;
-        margin-bottom: 8px;
-        font-size: 1rem;
+        margin-bottom: 10px;
       }
 
-      /* Adjust arrows for mobile (all pointing left) */
-      .memory.left .content::before, .memory.right .content::before {
+      .memory.left .content::before,
+      .memory.right .content::before {
         left: -23px;
         right: auto;
+        top: 18px;
         border-right-color: var(--card-bg);
         border-left-color: transparent;
       }
       
-      .content { padding: 20px; }
+      .content { padding: 18px; }
+      .calendar-showcase { padding: 18px 15px; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Subtle Floating Petals & Hearts Background Canvas -->
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- Background Music Audio Tag -->
   <audio id="bg-music" loop>
     <source src="our-song.mp3" type="audio/mpeg">
   </audio>
 
+  <!-- Floating Vinyl Music Player -->
   <div class="music-player" id="music-btn">
-    <span id="play-icon">▶️</span>
+    <div class="vinyl-disc" id="play-icon">▶</div>
     <span id="music-text">Play Our Song</span>
+    <div class="equalizer">
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+    </div>
   </div>
 
+  <!-- HERO BANNER SECTION -->
   <section class="hero">
-    <div style="background-color:rgba(255,255,255,0.1);padding:15px;">
-      <h1>Happy Birthday,<br>My Sakit Kepala!</h1>
+    <div class="hero-glass-box">
+      <div class="hero-badge">✨ Our Story & Milestones ✨</div>
+      <h1>Happy Birthday,<br><span>My Sakit Kepala!</span></h1>
       <p>
         As a special gift to you for being such an amazing fiancé,<br/>
         I wanted to create a timeline for you to look back whenever you want<br/>
@@ -318,84 +1146,528 @@
         A nod to the efforts you took to making cute little websites for me
       </p>
     </div>
+
+    <a href="#special-dates" class="scroll-indicator">
+      <span>Explore Our Memories</span>
+      <div class="scroll-heart">❤️</div>
+    </a>
   </section>
 
-  <div class="timeline">
+  <!-- ========================================================================
+       INTERACTIVE "OUR SPECIAL DATES" CALENDAR
+       ======================================================================== -->
+  <section class="calendar-section" id="special-dates">
+    <div class="section-header">
+      <span class="section-eyebrow">Forever Marked in My Heart</span>
+      <h2>Our Special Dates Calendar 📅</h2>
+      <p>Tap any pulsing heart date or milestone below to preview & jump to that memory</p>
+    </div>
+
+    <div class="calendar-showcase">
+      <!-- Decorative Notebook Rings -->
+      <div class="calendar-rings">
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+      </div>
+
+      <!-- Quick Milestone Selector Pills -->
+      <div class="milestone-pills">
+        <button class="milestone-pill active" onclick="selectMilestone(0, this)">
+          <span class="pill-heart">📞</span> Dec 25: The Beginning
+        </button>
+        <button class="milestone-pill" onclick="selectMilestone(1, this)">
+          <span class="pill-heart">🦢</span> Dubai: Love Lake
+        </button>
+        <button class="milestone-pill" onclick="selectMilestone(2, this)">
+          <span class="pill-heart">💍</span> Aug 31, 2026: The Proposal
+        </button>
+        <button class="milestone-pill" onclick="selectMilestone(3, this)">
+          <span class="pill-heart">🤪</span> Just Us: Funny Memories
+        </button>
+        <button class="milestone-pill" onclick="selectMilestone(4, this)">
+          <span class="pill-heart">🥂</span> Sept 12, 2026: The Big Day
+        </button>
+      </div>
+
+      <!-- Calendar Sheet + Interactive Memory Spotlight -->
+      <div class="calendar-body">
+        <div class="calendar-sheet">
+          <div class="calendar-month-tabs">
+            <div class="month-title" id="calendar-month-label">🗓️ December</div>
+            <div class="month-switch-btns">
+              <button class="month-tab-btn active" id="tab-dec" onclick="renderCalendarMonth('dec')">Dec</button>
+              <button class="month-tab-btn" id="tab-aug" onclick="renderCalendarMonth('aug')">Aug 2026</button>
+              <button class="month-tab-btn" id="tab-sep" onclick="renderCalendarMonth('sep')">Sept 2026</button>
+            </div>
+          </div>
+
+          <div class="days-header">
+            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+          </div>
+          <div class="days-grid" id="calendar-days-grid">
+            <!-- Dynamically populated by JS -->
+          </div>
+        </div>
+
+        <!-- Spotlight Preview Box -->
+        <div class="calendar-spotlight" id="calendar-spotlight">
+          <div>
+            <span class="spotlight-badge" id="spotlight-date">December 25</span>
+            <h3 id="spotlight-title">The Beginning 📞</h3>
+            <p id="spotlight-desc">From our first nervous interaction. Both of us not knowing what to expect—and it turned into the most fun call I had in a while!</p>
+          </div>
+          <button class="jump-to-memory-btn" id="spotlight-jump-btn" onclick="jumpToMemory('memory-1')">
+            Jump to Polaroid Memory ↓
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       ALL-IN-ONE POLAROID MEMORIES & HEARTBEAT TIMELINE
+       ======================================================================== -->
+  <div class="memories-container" id="timeline-container">
+    <!-- Center Timeline Lines -->
+    <div class="timeline-line-track"></div>
+    <div class="timeline-line-progress" id="timeline-progress"></div>
     
-    <div class="memory left">
-      <div class="date">Early Days</div>
+    <!-- MEMORY 1: THE BEGINNING (25th December) -->
+    <div class="memory left" id="memory-1">
+      <div class="timeline-heart-node">❤️</div>
+      <div class="date-badge-wrapper">
+        <div class="date">December 25</div>
+      </div>
       <div class="content">
-        <h2>The Beginning</h2>
-        <img src="first_call.png" alt="First Memory">
-        <p class="typewriter-text">From our first nervous interaction.<br/>Both of us not knowing what to expect.<br/>Plot twist: It was the most fun call I had in a while</p>
+        <div class="card-header-row">
+          <h2>The Beginning</h2>
+        </div>
+
+        <!-- Hanging Polaroid with 3D Flip -->
+        <div class="polaroid-wrapper" onclick="togglePolaroidFlip(this)">
+          <div class="hanging-hardware">
+            <div class="twine-thread"></div>
+            <div class="wooden-clip"><div class="fairy-bulb"></div></div>
+          </div>
+          <div class="polaroid-card">
+            <div class="polaroid-front">
+              <img src="first_call.png" alt="First Memory" onerror="this.onerror=null; this.src=getFallbackSVG('call');">
+              <div class="polaroid-caption-bar">
+                <span>Where it all began 📞</span>
+                <span class="flip-hint">Tap to flip 🔄</span>
+              </div>
+            </div>
+            <div class="polaroid-back">
+              <span class="secret-note-label">December 25 💌</span>
+              <p class="secret-note-text">"Little did I know that hearing your voice on that very first call would become my favorite sound in the entire world."</p>
+              <span class="flip-hint">Tap to flip back ↩️</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="typewriter-box">
+          <p class="typewriter-text">From our first nervous interaction.<br/>Both of us not knowing what to expect.<br/>Plot twist: It was the most fun call I had in a while</p>
+        </div>
       </div>
     </div>
 
-    <div class="memory right">
-      <div class="date">A Special Day</div>
+    <!-- MEMORY 2: LOVE LAKE DUBAI (Clickable maps.png Polaroid) -->
+    <div class="memory right" id="memory-2">
+      <div class="timeline-heart-node">💖</div>
+      <div class="date-badge-wrapper">
+        <div class="date">A Special Day</div>
+      </div>
       <div class="content">
-        <h2>Our first biggest memory in Dubai</h2>
-        <a href="https://www.google.com/maps/place/Love+Lake/@24.8377225,55.4014987,1808m/data=!3m1!1e3!4m6!3m5!1s0x3e5f814706f7833b:0xf002386f582fba3d!8m2!3d24.8351908!4d55.4033872!16s%2Fg%2F11l3d2nns_?hl=en&entry=ttu&g_ep=EgoyMDI2MDkxNi4wIKXMDSoASAFQAw%3D%3D">
-          <img src="maps.png" alt="Maps embed">
-        </a>
-        <p class="typewriter-text">Love Lake<br/>A google maps pin so you remember where it all happened</p>
+        <div class="card-header-row">
+          <h2>Our first biggest memory in Dubai</h2>
+        </div>
+
+        <div class="polaroid-wrapper">
+          <div class="hanging-hardware">
+            <div class="twine-thread"></div>
+            <div class="wooden-clip"><div class="fairy-bulb"></div></div>
+          </div>
+          <a class="map-link-wrapper" href="https://www.google.com/maps/place/Love+Lake/@24.8377225,55.4014987,1808m/data=!3m1!1e3!4m6!3m5!1s0x3e5f814706f7833b:0xf002386f582fba3d!8m2!3d24.8351908!4d55.4033872!16s%2Fg%2F11l3d2nns_?hl=en&entry=ttu&g_ep=EgoyMDI2MDkxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">
+            <div class="polaroid-card">
+              <div class="polaroid-front">
+                <img src="maps.png" alt="Maps embed" onerror="this.onerror=null; this.src=getFallbackSVG('maps');">
+                <div class="polaroid-caption-bar">
+                  <span>📍 Love Lake, Dubai</span>
+                  <span class="map-pin-badge">Open Google Maps ↗</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="typewriter-box">
+          <p class="typewriter-text">Love Lake<br/>A google maps pin so you remember where it all happened</p>
+        </div>
       </div>
     </div>
 
-    <div class="memory left">
-      <div class="date">August 31, 2026</div>
+    <!-- MEMORY 3: THE PROPOSAL (August 31, 2026) -->
+    <div class="memory left" id="memory-3">
+      <div class="timeline-heart-node">💍</div>
+      <div class="date-badge-wrapper">
+        <div class="date">August 31, 2026</div>
+      </div>
       <div class="content">
-        <h2>The Proposal</h2>
-        <img src="proposal.jpg" alt="Proposal Memory">
-        <p class="typewriter-text">One of the happiest days of my life<br/>Well worth all the stress and effort.</p>
+        <div class="card-header-row">
+          <h2>The Proposal</h2>
+        </div>
+
+        <!-- Hanging Polaroid with 3D Flip -->
+        <div class="polaroid-wrapper" onclick="togglePolaroidFlip(this)">
+          <div class="hanging-hardware">
+            <div class="twine-thread"></div>
+            <div class="wooden-clip"><div class="fairy-bulb"></div></div>
+          </div>
+          <div class="polaroid-card">
+            <div class="polaroid-front">
+              <img src="proposal.jpg" alt="Proposal Memory" onerror="this.onerror=null; this.src=getFallbackSVG('proposal');">
+              <div class="polaroid-caption-bar">
+                <span>She said YES! 💍✨</span>
+                <span class="flip-hint">Tap to flip 🔄</span>
+              </div>
+            </div>
+            <div class="polaroid-back">
+              <span class="secret-note-label">August 31, 2026 💌</span>
+              <p class="secret-note-text">"My heart was racing so fast, but the moment I saw your smile, every bit of planning and stress melted into pure happiness."</p>
+              <span class="flip-hint">Tap to flip back ↩️</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="typewriter-box">
+          <p class="typewriter-text">One of the happiest days of my life<br/>Well worth all the stress and effort.</p>
+        </div>
       </div>
     </div>
 
-    <div class="memory right">
-      <div class="date">Just Us</div>
+    <!-- MEMORY 4: FUNNY MEMORIES -->
+    <div class="memory right" id="memory-4">
+      <div class="timeline-heart-node">😄</div>
+      <div class="date-badge-wrapper">
+        <div class="date">Just Us</div>
+      </div>
       <div class="content">
-        <h2>Funny Memories</h2>
-        <img src="funny.jpg" alt="Funny Memory">
-        <p class="typewriter-text">Cause the best memories are the funny ones :3</p>
+        <div class="card-header-row">
+          <h2>Funny Memories</h2>
+        </div>
+
+        <!-- Hanging Polaroid with 3D Flip -->
+        <div class="polaroid-wrapper" onclick="togglePolaroidFlip(this)">
+          <div class="hanging-hardware">
+            <div class="twine-thread"></div>
+            <div class="wooden-clip"><div class="fairy-bulb"></div></div>
+          </div>
+          <div class="polaroid-card">
+            <div class="polaroid-front">
+              <img src="funny.jpg" alt="Funny Memory" onerror="this.onerror=null; this.src=getFallbackSVG('funny');">
+              <div class="polaroid-caption-bar">
+                <span>Goofy Partners in Crime :3</span>
+                <span class="flip-hint">Tap to flip 🔄</span>
+              </div>
+            </div>
+            <div class="polaroid-back">
+              <span class="secret-note-label">My Favorite Sakit Kepala 💌</span>
+              <p class="secret-note-text">"Being able to be 100% silly, unfiltered, and ridiculous with you is one of my favorite parts of our relationship."</p>
+              <span class="flip-hint">Tap to flip back ↩️</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="typewriter-box">
+          <p class="typewriter-text">Cause the best memories are the funny ones :3</p>
+        </div>
       </div>
     </div>
 
-    <div class="memory left">
-      <div class="date">September 2026</div>
+    <!-- MEMORY 5: THE BIG DAY (September 12, 2026) -->
+    <div class="memory left" id="memory-5">
+      <div class="timeline-heart-node">🥂</div>
+      <div class="date-badge-wrapper">
+        <div class="date">September 12, 2026</div>
+      </div>
       <div class="content">
-        <h2>The big day</h2>
-        <img src="engagment.jpg" alt="Engagement Memory">
-        <p class="typewriter-text">A day we celebrated our love with everyone who loves us<br/>The drama, stress, misunderstanding only brought us closer</p>
+        <div class="card-header-row">
+          <h2>The big day</h2>
+        </div>
+
+        <!-- Hanging Polaroid with 3D Flip -->
+        <div class="polaroid-wrapper" onclick="togglePolaroidFlip(this)">
+          <div class="hanging-hardware">
+            <div class="twine-thread"></div>
+            <div class="wooden-clip"><div class="fairy-bulb"></div></div>
+          </div>
+          <div class="polaroid-card">
+            <div class="polaroid-front">
+              <img src="engagment.jpg" alt="Engagement Memory" onerror="this.onerror=null; this.src=getFallbackSVG('engagement');">
+              <div class="polaroid-caption-bar">
+                <span>Officially Locked In ❤️</span>
+                <span class="flip-hint">Tap to flip 🔄</span>
+              </div>
+            </div>
+            <div class="polaroid-back">
+              <span class="secret-note-label">September 12, 2026 💌</span>
+              <p class="secret-note-text">"Through every bit of chaos and celebration, holding your hand reminded me that we can conquer anything together."</p>
+              <span class="flip-hint">Tap to flip back ↩️</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="typewriter-box">
+          <p class="typewriter-text">A day we celebrated our love with everyone who loves us<br/>The drama, stress, misunderstanding only brought us closer</p>
+        </div>
       </div>
     </div>
 
   </div>
 
+  <!-- BOTTOM BANNER -->
   <div class="bottom-banner">
     More coming soon! ❤️<br/>
     Since we chose each other for life ;)
   </div>
 
   <script>
+    // =========================================================================
+    // 1. POLAROID 3D FLIP INTERACTION
+    // =========================================================================
+    function togglePolaroidFlip(wrapper) {
+      const card = wrapper.querySelector('.polaroid-card');
+      if (card) {
+        card.classList.toggle('flipped');
+      }
+    }
+
+    // =========================================================================
+    // 2. INTERACTIVE "OUR SPECIAL DATES" CALENDAR & HEART BURST
+    // =========================================================================
+    const milestonesData = [
+      {
+        date: 'December 25',
+        title: 'The Beginning 📞',
+        desc: 'From our first nervous interaction. Both of us not knowing what to expect—and it turned into the most fun call I had in a while!',
+        targetId: 'memory-1',
+        month: 'dec'
+      },
+      {
+        date: 'A Special Day in Dubai',
+        title: 'Love Lake Dubai 🦢',
+        desc: 'Our first biggest memory in Dubai, pinned right on the map so we always remember where it all happened.',
+        targetId: 'memory-2',
+        month: 'dec'
+      },
+      {
+        date: 'August 31, 2026',
+        title: 'The Proposal 💍',
+        desc: 'One of the happiest days of my life! Well worth all the stress and effort to see your reaction.',
+        targetId: 'memory-3',
+        month: 'aug'
+      },
+      {
+        date: 'Everyday Magic',
+        title: 'Funny Memories :3 📸',
+        desc: 'Because the best memories are always the goofy, unfiltered ones where we cannot stop laughing.',
+        targetId: 'memory-4',
+        month: 'sep'
+      },
+      {
+        date: 'September 12, 2026',
+        title: 'The Big Day 🥂',
+        desc: 'A day we celebrated our love with everyone who loves us. The drama, stress, and misunderstanding only brought us closer.',
+        targetId: 'memory-5',
+        month: 'sep'
+      }
+    ];
+
+    function selectMilestone(index, btnEl) {
+      const m = milestonesData[index];
+      document.querySelectorAll('.milestone-pill').forEach(p => p.classList.remove('active'));
+      if (btnEl) {
+        btnEl.classList.add('active');
+        spawnHeartBurst(btnEl);
+      }
+
+      document.getElementById('spotlight-date').textContent = m.date;
+      document.getElementById('spotlight-title').textContent = m.title;
+      document.getElementById('spotlight-desc').textContent = m.desc;
+      document.getElementById('spotlight-jump-btn').setAttribute('onclick', `jumpToMemory('${m.targetId}')`);
+
+      renderCalendarMonth(m.month);
+    }
+
+    function renderCalendarMonth(monthKey) {
+      const grid = document.getElementById('calendar-days-grid');
+      const label = document.getElementById('calendar-month-label');
+      document.getElementById('tab-dec').classList.toggle('active', monthKey === 'dec');
+      document.getElementById('tab-aug').classList.toggle('active', monthKey === 'aug');
+      document.getElementById('tab-sep').classList.toggle('active', monthKey === 'sep');
+
+      grid.innerHTML = '';
+
+      // Month configurations:
+      // December 2025 starts on Monday (index 1), 31 days
+      // August 2026 starts on Saturday (index 6), 31 days
+      // September 2026 starts on Tuesday (index 2), 30 days
+      const monthConfigs = {
+        dec: { startOffset: 1, totalDays: 31, title: '🗓️ December' },
+        aug: { startOffset: 6, totalDays: 31, title: '🗓️ August 2026' },
+        sep: { startOffset: 2, totalDays: 30, title: '🗓️ September 2026' }
+      };
+
+      const cfg = monthConfigs[monthKey] || monthConfigs.dec;
+      label.textContent = cfg.title;
+
+      for (let i = 0; i < cfg.startOffset; i++) {
+        const empty = document.createElement('div');
+        empty.className = 'day-cell empty';
+        grid.appendChild(empty);
+      }
+
+      for (let d = 1; d <= cfg.totalDays; d++) {
+        const cell = document.createElement('div');
+        cell.className = 'day-cell';
+        cell.textContent = d;
+
+        // Highlight Dec 25 (The Beginning), Aug 31 (The Proposal), & Sept 12 (The Big Day)
+        if (monthKey === 'dec' && d === 25) {
+          cell.classList.add('special-day');
+          cell.title = 'December 25: The Beginning! Click to view';
+          cell.onclick = () => {
+            selectMilestone(0, document.querySelectorAll('.milestone-pill')[0]);
+            jumpToMemory('memory-1');
+          };
+        } else if (monthKey === 'aug' && d === 31) {
+          cell.classList.add('special-day');
+          cell.title = 'August 31, 2026: The Proposal! Click to view';
+          cell.onclick = () => {
+            selectMilestone(2, document.querySelectorAll('.milestone-pill')[2]);
+            jumpToMemory('memory-3');
+          };
+        } else if (monthKey === 'sep' && d === 12) {
+          cell.classList.add('special-day');
+          cell.title = 'September 12, 2026: The Big Day! Click to view';
+          cell.onclick = () => {
+            selectMilestone(4, document.querySelectorAll('.milestone-pill')[4]);
+            jumpToMemory('memory-5');
+          };
+        }
+        grid.appendChild(cell);
+      }
+    }
+
+    function jumpToMemory(elementId) {
+      const target = document.getElementById(elementId);
+      if (!target) return;
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const card = target.querySelector('.content');
+      if (card) {
+        card.classList.remove('spotlight-pulse');
+        void card.offsetWidth; // trigger reflow
+        card.classList.add('spotlight-pulse');
+      }
+    }
+
+    // Mini burst of floating hearts when clicking calendar dates
+    function spawnHeartBurst(sourceEl) {
+      const rect = sourceEl.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const emojis = ['❤️', '💖', '✨', '🌸', '💕'];
+
+      for (let i = 0; i < 8; i++) {
+        const span = document.createElement('span');
+        span.textContent = emojis[i % emojis.length];
+        span.style.position = 'fixed';
+        span.style.left = centerX + 'px';
+        span.style.top = centerY + 'px';
+        span.style.fontSize = '1.1rem';
+        span.style.pointerEvents = 'none';
+        span.style.zIndex = 3000;
+        span.style.transition = 'all 0.85s cubic-bezier(0.16, 1, 0.3, 1)';
+        document.body.appendChild(span);
+
+        const angle = (Math.PI * 2 * i) / 8;
+        const dist = 35 + Math.random() * 35;
+        requestAnimationFrame(() => {
+          span.style.transform = `translate(${Math.cos(angle) * dist}px, ${Math.sin(angle) * dist - 25}px) scale(0.4)`;
+          span.style.opacity = '0';
+        });
+
+        setTimeout(() => span.remove(), 900);
+      }
+    }
+
+    // Initialize Calendar on Load to December (The Beginning)
+    renderCalendarMonth('dec');
+
+    // =========================================================================
+    // 3. AUDIO PLAYER WITH ROMANTIC MUSIC-BOX FALLBACK FOR PREVIEW
+    // =========================================================================
     const bgMusic = document.getElementById('bg-music');
     const musicBtn = document.getElementById('music-btn');
     const playIcon = document.getElementById('play-icon');
     const musicText = document.getElementById('music-text');
     let isPlaying = false;
+    let synthInterval = null;
+    let audioCtx = null;
+
+    // Gentle Web Audio music box chime fallback if our-song.mp3 isn't uploaded yet
+    function startMusicBoxFallback() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const notes = [523.25, 659.25, 783.99, 1046.50, 783.99, 659.25, 587.33, 783.99];
+      let step = 0;
+      synthInterval = setInterval(() => {
+        if (!isPlaying) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(notes[step % notes.length], audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.1);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1.1);
+        step++;
+      }, 650);
+    }
+
+    function stopMusicBoxFallback() {
+      if (synthInterval) {
+        clearInterval(synthInterval);
+        synthInterval = null;
+      }
+    }
 
     musicBtn.addEventListener('click', () => {
       if (isPlaying) {
         bgMusic.pause();
-        playIcon.textContent = '▶️';
+        stopMusicBoxFallback();
+        musicBtn.classList.remove('playing');
+        playIcon.textContent = '▶';
         musicText.textContent = 'Play Our Song';
       } else {
-        bgMusic.play();
-        playIcon.textContent = '⏸️';
+        musicBtn.classList.add('playing');
+        playIcon.textContent = '♫';
         musicText.textContent = 'Pause Song';
+        bgMusic.play().catch(() => {
+          // If our-song.mp3 isn't in the folder yet during preview, play gentle music-box notes
+          startMusicBoxFallback();
+        });
       }
       isPlaying = !isPlaying;
     });
 
+    // =========================================================================
+    // 6. TYPEWRITER TEXT & SCROLL OBSERVER + HEARTBEAT TIMELINE PROGRESS
+    // =========================================================================
     document.querySelectorAll('.typewriter-text').forEach(p => {
       p.setAttribute('data-text', p.innerHTML);
       p.innerHTML = '';
@@ -421,7 +1693,7 @@
           if (isTag) {
             type(); 
           } else {
-            setTimeout(type, 35); 
+            setTimeout(type, 32); 
           }
         } else {
           element.innerHTML = currentHTML; 
@@ -448,6 +1720,94 @@
 
     document.querySelectorAll('.memory').forEach(el => observer.observe(el));
 
+    // Dynamic Center Timeline Scroll Fill
+    window.addEventListener('scroll', () => {
+      const container = document.getElementById('timeline-container');
+      const progressLine = document.getElementById('timeline-progress');
+      if (!container || !progressLine) return;
+
+      const rect = container.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const start = windowHeight * 0.55;
+      const scrolled = start - rect.top;
+      const percentage = Math.max(0, Math.min(100, (scrolled / rect.height) * 100));
+      progressLine.style.height = percentage + '%';
+    }, { passive: true });
+
+    // =========================================================================
+    // 7. DELICATE FLOATING ROSE PETALS & HEARTS CANVAS ANIMATION
+    // =========================================================================
+    const canvas = document.getElementById('petals-canvas');
+    const ctx = canvas.getContext('2d');
+    let petals = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Petal {
+      constructor() {
+        this.reset(true);
+      }
+      reset(initial = false) {
+        this.x = Math.random() * canvas.width;
+        this.y = initial ? Math.random() * canvas.height : -20;
+        this.size = 6 + Math.random() * 8;
+        this.speedY = 0.4 + Math.random() * 0.7;
+        this.speedX = -0.3 + Math.random() * 0.6;
+        this.angle = Math.random() * Math.PI * 2;
+        this.spin = -0.015 + Math.random() * 0.03;
+        this.opacity = 0.25 + Math.random() * 0.35;
+        this.isHeart = Math.random() > 0.7;
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX + Math.sin(this.y * 0.012) * 0.3;
+        this.angle += this.spin;
+        if (this.y > canvas.height + 20) this.reset(false);
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.angle);
+        ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = this.isHeart ? '#ff758c' : '#ffb6c1';
+
+        if (this.isHeart) {
+          const s = this.size * 0.6;
+          ctx.beginPath();
+          ctx.moveTo(0, s / 4);
+          ctx.bezierCurveTo(0, 0, -s / 2, 0, -s / 2, s / 4);
+          ctx.bezierCurveTo(-s / 2, s / 2, 0, s * 0.75, 0, s);
+          ctx.bezierCurveTo(0, s * 0.75, s / 2, s / 2, s / 2, s / 4);
+          ctx.bezierCurveTo(s / 2, 0, 0, 0, 0, s / 4);
+          ctx.fill();
+        } else {
+          // Soft oval flower petal
+          ctx.beginPath();
+          ctx.ellipse(0, 0, this.size, this.size * 0.55, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 24; i++) {
+      petals.push(new Petal());
+    }
+
+    function animatePetals() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      petals.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animatePetals);
+    }
+    window.onload = animatePetals;
   </script>
 </body>
 </html>
