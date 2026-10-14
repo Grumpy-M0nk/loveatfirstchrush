@@ -32,7 +32,7 @@
           bg1: '#fbc2eb', bg2: '#a6c1ee',
           icon: '🎈 💍 ✨ 🎈',
           title: 'proposal.jpg',
-          sub: 'August 31, 2026 • The Proposal'
+          sub: 'August 30, 2026 • The Proposal'
         },
         funny: {
           bg1: '#ffecd2', bg2: '#fcb69f',
@@ -1182,7 +1182,7 @@
           <span class="pill-heart">🦢</span> Dubai: Love Lake
         </button>
         <button class="milestone-pill" onclick="selectMilestone(2, this)">
-          <span class="pill-heart">💍</span> Aug 31, 2026: The Proposal
+          <span class="pill-heart">💍</span> Aug 30, 2026: The Proposal
         </button>
         <button class="milestone-pill" onclick="selectMilestone(3, this)">
           <span class="pill-heart">🤪</span> Just Us: Funny Memories
@@ -1309,11 +1309,11 @@
       </div>
     </div>
 
-    <!-- MEMORY 3: THE PROPOSAL (August 31, 2026) -->
+    <!-- MEMORY 3: THE PROPOSAL (August 30, 2026) -->
     <div class="memory left" id="memory-3">
       <div class="timeline-heart-node">💍</div>
       <div class="date-badge-wrapper">
-        <div class="date">August 31, 2026</div>
+        <div class="date">August 30, 2026</div>
       </div>
       <div class="content">
         <div class="card-header-row">
@@ -1335,7 +1335,7 @@
               </div>
             </div>
             <div class="polaroid-back">
-              <span class="secret-note-label">August 31, 2026 💌</span>
+              <span class="secret-note-label">August 30, 2026 💌</span>
               <p class="secret-note-text">"My heart was racing so fast, but the moment I saw your smile, every bit of planning and stress melted into pure happiness."</p>
               <span class="flip-hint">Tap to flip back ↩️</span>
             </div>
@@ -1464,7 +1464,7 @@
         month: 'dec'
       },
       {
-        date: 'August 31, 2026',
+        date: 'August 30, 2026',
         title: 'The Proposal 💍',
         desc: 'One of the happiest days of my life! Well worth all the stress and effort to see your reaction.',
         targetId: 'memory-3',
@@ -1535,7 +1535,7 @@
         cell.className = 'day-cell';
         cell.textContent = d;
 
-        // Highlight Dec 25 (The Beginning), Aug 31 (The Proposal), & Sept 12 (The Big Day)
+        // Highlight Dec 25 (The Beginning), Aug 30 (The Proposal), & Sept 12 (The Big Day)
         if (monthKey === 'dec' && d === 25) {
           cell.classList.add('special-day');
           cell.title = 'December 25: The Beginning! Click to view';
@@ -1543,9 +1543,9 @@
             selectMilestone(0, document.querySelectorAll('.milestone-pill')[0]);
             jumpToMemory('memory-1');
           };
-        } else if (monthKey === 'aug' && d === 31) {
+        } else if (monthKey === 'aug' && d === 30) {
           cell.classList.add('special-day');
-          cell.title = 'August 31, 2026: The Proposal! Click to view';
+          cell.title = 'August 30, 2026: The Proposal! Click to view';
           cell.onclick = () => {
             selectMilestone(2, document.querySelectorAll('.milestone-pill')[2]);
             jumpToMemory('memory-3');
